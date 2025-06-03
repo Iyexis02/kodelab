@@ -7,9 +7,9 @@ const Navigation = () => {
 
   return (
     <div className="hidden md:flex items-center space-x-8">
-      {navItems.map((navItem: string) => {
+      {navItems.map((navItem: string, index: number) => {
         return (
-          <a href={createUrl(navItem)} className={navClass}>
+          <a key={navItem + '-' + index} href={createUrl(navItem)} className={navClass}>
             {navItem}
           </a>
         );

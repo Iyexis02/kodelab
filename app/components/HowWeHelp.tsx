@@ -7,7 +7,7 @@ const HowWeHelpHeading = () => {
     <div className="text-center mb-16">
       <h2 className="text-4xl md:text-5xl font-bold text-dark mb-4">How we help</h2>
       <p className="text-xl text-dark max-w-2xl mx-auto">
-        From concept to deployment, we're your trusted technology partner
+        {"From concept to deployment, we're your trusted technology partner"}
       </p>
     </div>
   );
