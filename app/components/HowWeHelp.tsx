@@ -55,7 +55,7 @@ const HowWeHelp = () => {
     <section className="py-20 bg-white">
       <div className="container mx-auto px-4">
         <HowWeHelpHeading />
-        <div className="grid md:grid-cols-3 gap-8">{generateCardContent(cards)}</div>
+        <div className="grid md:grid-cols-3 gap-8 text-center">{generateCardContent(cards)}</div>
       </div>
     </section>
   );
