@@ -1,8 +1,9 @@
 import { Card, CardContent } from './app/components/ui/Card';
 
 const generateCardContent = (cards: CardInfo[]) => {
-  const cardClass = 'group hover:shadow-xl transition-all duration-300 border-0 shadow-lg hover:-translate-y-2 p-4';
-  const cardContentClass = 'p-8 text-center';
+  const cardClass =
+    'group hover:shadow-xl transition-all duration-300 border-0 shadow-lg hover:-translate-y-2 px-4 py-4';
+  const cardContentClass = 'text-center';
   const headerClass = 'text-2xl font-bold text-dark mb-4';
   const descriptionClass = 'text-dark leading-relaxed';
 
