@@ -25,3 +25,66 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+@font-face {
+  font-family: 'glober';
+  src: url('/fonts/Glober-Trial-Black.ttf') format('ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'glober';
+  src: url('/fonts/Glober-Trial-Bold.ttf') format('ttf');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'glober';
+  src: url('/fonts/Glober-Trial-Book.ttf') format('ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'glober';
+  src: url('/fonts/Glober-Trial-ExtraBold.ttf') format('ttf');
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'glober';
+  src: url('/fonts/Glober-Trial-Heavy.ttf') format('ttf');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'glober';
+  src: url('/fonts/Glober-Trial-Light.ttf') format('ttf');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'glober';
+  src: url('/fonts/Glober-Trial-Regular.ttf') format('ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'glober';
+  src: url('/fonts/Glober-Trial-Semibold.ttf') format('ttf');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'glober';
+  src: url('/fonts/Glober-Trial-Thin.ttf') format('ttf');
+  font-weight: 300;
+  font-style: normal;
+}
