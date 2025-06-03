@@ -19,9 +19,9 @@ const Footer = () => {
           <div className="text-center md:text-left">
             <p className="text-background-secondary mb-2">© 2025 Dream Bigger. All rights reserved.</p>
             <div className="flex flex-wrap justify-center md:justify-start gap-6 text-sm">
-              {footerLinks.map((footerLink: string) => {
+              {footerLinks.map((footerLink: string, index: number) => {
                 return (
-                  <a href={createUrl(footerLink)} className={urlClass}>
+                  <a key={footerLink + '-' + index} href={createUrl(footerLink)} className={urlClass}>
                     {footerLink}
                   </a>
                 );

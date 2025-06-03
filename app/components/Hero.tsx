@@ -11,7 +11,7 @@ const Hero = () => {
         <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
           Dream bigger.
           <span className="block text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-blue-400">
-            We'll build it.
+            {"We'll build it."}
           </span>
         </h1>
         <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed">
@@ -27,7 +27,7 @@ const Hero = () => {
           <Button
             size="lg"
             className="bg-emerald-600 hover:bg-emerald-700 text-background-primary px-8 py-4 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
-            See what we've built
+            {"See what we've built"}
           </Button>
         </div>
       </div>
