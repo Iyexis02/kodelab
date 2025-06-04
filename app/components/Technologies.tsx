@@ -1,5 +1,6 @@
 import { Cloud, Code, Database, Smartphone } from 'lucide-react';
 
+import { CardInfo } from '@/types';
 import { generateCardContent } from '@/uiUtils';
 
 const MainHeading = () => {

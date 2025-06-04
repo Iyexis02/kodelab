@@ -1,4 +1,5 @@
 import { Card, CardContent } from './app/components/ui/Card';
+import { CardInfo } from './types';
 
 const generateCardContent = (cards: CardInfo[]) => {
   const cardClass =
