@@ -1,0 +1,25 @@
+// schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url = env("DB_URL") // uses connection pooling
+}
+
+model Team {
+  id           String   @id @default(uuid())      // UUID as primary key
+  name         String                           // First name
+  surname      String                           // Last name
+  role         String?                          // Optional role
+  image        String?                          // Optional image URL or Base64
+  introduction String?                          // Optional introduction text
+  skills       Json?                            // JSON array of skills
+  linkedin     String?                          // Optional LinkedIn URL
+  twitter      String?                          // Optional Twitter URL
+  email        String   @unique                 // Email address (must be unique)
+
+  @@map("team") // Optional: maps this model to the "users" table in Postgres
+}
