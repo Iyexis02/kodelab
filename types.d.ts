@@ -22,5 +22,3 @@ type Team = {
   skills?: string | null;
   socials: Socials;
 };
-
-type TeamSeedType = Omit<Prisma.TeamCreateInput, 'id'>;
