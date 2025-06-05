@@ -5,15 +5,15 @@ import { generateCardContent } from '@/uiUtils';
 const MainHeading = () => {
   return (
     <div className="text-center mb-16">
-      <h2 className="text-4xl md:text-5xl font-bold text-dark mb-4">Technologies we use</h2>
+      <h2 className="text-4xl md:text-5xl font-bold text-dark mb-4">Our services</h2>
       <p className="text-xl text-dark max-w-2xl mx-auto">
-        We leverage cutting-edge technologies to deliver exceptional results
+        From concept to deployment, we offer comprehensive development services
       </p>
     </div>
   );
 };
 
-const Technologies = () => {
+const Services = () => {
   const iconContainerClass =
     'w-16 h-16 bg-gradient-to-br rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300';
   const iconClass = 'w-8 h-8 text-background-primary';
@@ -22,15 +22,13 @@ const Technologies = () => {
     {
       icon: (
         <div className={iconContainerClass + ` from-blue-500 to-cyan-400`}>
-          {' '}
-          <Code className={iconClass} />{' '}
+          <Code className={iconClass} />
         </div>
       ),
       title: {
-        name: 'React',
+        name: 'Web Development',
       },
-      description:
-        'We use React to build fast, responsive UIs that scale across devices and provide exceptional user experiences.',
+      description: ' Modern, responsive web applications built with React, Next.js, and cutting-edge technologies.',
     },
     {
       icon: (
@@ -40,10 +38,9 @@ const Technologies = () => {
         </div>
       ),
       title: {
-        name: 'Java Spring Boot',
+        name: 'Backend Development',
       },
-      description:
-        'Spring Boot powers our backend services for robust, scalable APIs that handle enterprise-level demands.',
+      description: '       Robust, scalable APIs and backend services using Java Spring Boot and modern architectures.',
     },
     {
       icon: (
@@ -53,10 +50,9 @@ const Technologies = () => {
         </div>
       ),
       title: {
-        name: 'Flutter',
+        name: 'Mobile Development',
       },
-      description:
-        'With Flutter, we deliver cross-platform mobile apps with native performance and beautiful interfaces.',
+      description: ' Cross-platform mobile apps with Flutter delivering native performance and beautiful interfaces.',
     },
     {
       icon: (
@@ -66,9 +62,9 @@ const Technologies = () => {
         </div>
       ),
       title: {
-        name: 'Amazon Web Services',
+        name: 'Cloud & DevOps',
       },
-      description: 'We deploy, scale, and secure applications using AWS cloud infrastructure and managed services.',
+      description: 'AWS cloud infrastructure, deployment automation, and scalable hosting solutions.',
     },
   ];
 
@@ -84,4 +80,4 @@ const Technologies = () => {
   );
 };
 
-export default Technologies;
+export default Services;

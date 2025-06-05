@@ -1,0 +1,16 @@
+export const phoneCodes = [
+  { code: '+1', country: 'US/CA' },
+  { code: '+44', country: 'UK' },
+  { code: '+49', country: 'DE' },
+  { code: '+33', country: 'FR' },
+  { code: '+39', country: 'IT' },
+  { code: '+34', country: 'ES' },
+  { code: '+31', country: 'NL' },
+  { code: '+41', country: 'CH' },
+  { code: '+43', country: 'AT' },
+  { code: '+385', country: 'HR' },
+  { code: '+381', country: 'RS' },
+  { code: '+386', country: 'SI' },
+  { code: '+387', country: 'BA' },
+  { code: '+382', country: 'ME' },
+];

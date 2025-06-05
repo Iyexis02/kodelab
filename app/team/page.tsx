@@ -53,7 +53,6 @@ const TeamPage = () => {
           </div>
         </div>
       </section>
-      <ContactForm />
     </>
   );
 };

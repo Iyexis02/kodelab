@@ -1,3 +1,53 @@
 export enum CardContentVariant {
   HowWeHelp = 'HowWeHelp',
 }
+
+export enum InquiryType {
+  ProjectDevelopment = 'Project Development',
+  CareerOpportunities = 'Career Opportunities',
+  TechnicalConsulting = 'Technical Consulting',
+  PartnershipInquiry = 'Partnership Inquiry',
+  GeneralInformation = 'General Information',
+  SupportMaintenance = 'Support & Maintenance',
+}
+
+export enum ProjectType {
+  WebApplication = 'Web Application',
+  MobileApp = 'Mobile App (iOS/Android)',
+  ECommercePlatform = 'E-commerce Platform',
+  EnterpriseSoftware = 'Enterprise Software',
+  APIDevelopment = 'API Development',
+  CloudMigration = 'Cloud Migration',
+  UIUXDesign = 'UI/UX Design',
+  Other = 'Other',
+}
+
+export enum BudgetRange {
+  LessThanFive = 'Under €5,000',
+  FiveToFifteen = '€5,000 - €15,000',
+  FifteenToFifty = '€15,000 - €50,000',
+  FiftyToHundred = '€50,000 - €100,000',
+  MoreThanHundred = '€100,000+',
+  DiscussInDetail = 'Discuss in detail',
+}
+
+export enum CareerPosition {
+  FrontendDeveloper = 'Frontend Developer',
+  BackendDeveloper = 'Backend Developer',
+  FullStackDeveloper = 'Full-Stack Developer',
+  MobileDeveloper = 'Mobile Developer',
+  DevOpsEngineer = 'DevOps Engineer',
+  UIUXDesigner = 'UI/UX Designer',
+  ProjectManager = 'Project Manager',
+  Internship = 'Internship',
+  Other = 'Other',
+}
+
+export enum Timeline {
+  ASAP = 'ASAP',
+  OneWeek = 'Within 1 month',
+  OneToThreeMonths = '1-3 months',
+  ThreeToSixMonths = '3-6 months',
+  AboveSixMonths = '6+ months',
+  Flexible = 'Flexible',
+}
