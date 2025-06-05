@@ -67,7 +67,6 @@ export function ContactForm({ onSubmit, isModal = false }: ContactFormProps) {
 
       setIsSubmitted(true);
 
-      // Reset form after successful submission
       setTimeout(() => {
         setFormData({
           firstName: '',
@@ -128,16 +127,13 @@ export function ContactForm({ onSubmit, isModal = false }: ContactFormProps) {
       <CardHeader className={`text-center ${isModal ? 'pb-4' : 'pb-6'}`}>
         <CardTitle className="text-3xl font-bold text-gray-900 mb-2">Get In Touch</CardTitle>
         <p className="text-gray-600 text-lg">
-          Whether you have a project in mind or are looking to join our team, we'd love to hear from you.
+          {"Whether you have a project in mind or are looking to join our team, we'd love to hear from you."}
         </p>
       </CardHeader>
-
       <CardContent className={`${isModal ? 'p-0 pt-4' : 'p-8 pt-0'}`}>
         <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Personal Information */}
           <div className="space-y-4">
             <h3 className="text-lg font-semibold text-gray-900 border-b pb-2">Personal Information</h3>
-
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <Label htmlFor="firstName" required>
@@ -152,7 +148,6 @@ export function ContactForm({ onSubmit, isModal = false }: ContactFormProps) {
                   error={errors.firstName}
                 />
               </div>
-
               <div>
                 <Label htmlFor="lastName" required>
                   Last Name
@@ -167,7 +162,6 @@ export function ContactForm({ onSubmit, isModal = false }: ContactFormProps) {
                 />
               </div>
             </div>
-
             <div>
               <Label htmlFor="email" required>
                 Email Address
@@ -181,7 +175,6 @@ export function ContactForm({ onSubmit, isModal = false }: ContactFormProps) {
                 error={errors.email}
               />
             </div>
-
             <div>
               <Label required>Phone Number</Label>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -197,7 +190,6 @@ export function ContactForm({ onSubmit, isModal = false }: ContactFormProps) {
                     ))}
                   </Select>
                 </div>
-
                 <div className="sm:col-span-2">
                   <Input
                     type="tel"
@@ -209,7 +201,6 @@ export function ContactForm({ onSubmit, isModal = false }: ContactFormProps) {
                 </div>
               </div>
             </div>
-
             <div>
               <Label htmlFor="company">Company/Organization (Optional)</Label>
               <Input
@@ -222,11 +213,8 @@ export function ContactForm({ onSubmit, isModal = false }: ContactFormProps) {
               />
             </div>
           </div>
-
-          {/* Inquiry Details */}
           <div className="space-y-4">
             <h3 className="text-lg font-semibold text-gray-900 border-b pb-2">Inquiry Details</h3>
-
             <div>
               <Label htmlFor="inquiryType" required>
                 What can we help you with?
@@ -244,8 +232,6 @@ export function ContactForm({ onSubmit, isModal = false }: ContactFormProps) {
                 ))}
               </Select>
             </div>
-
-            {/* Project-specific fields */}
             {isProjectInquiry && (
               <>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -264,7 +250,6 @@ export function ContactForm({ onSubmit, isModal = false }: ContactFormProps) {
                       ))}
                     </Select>
                   </div>
-
                   <div>
                     <Label htmlFor="budget">Budget Range</Label>
                     <Select
@@ -281,7 +266,6 @@ export function ContactForm({ onSubmit, isModal = false }: ContactFormProps) {
                     </Select>
                   </div>
                 </div>
-
                 <div>
                   <Label htmlFor="timeline">Project Timeline</Label>
                   <Select
