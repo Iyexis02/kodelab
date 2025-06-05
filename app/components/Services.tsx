@@ -28,7 +28,7 @@ const Services = () => {
       title: {
         name: 'Web Development',
       },
-      description: ' Modern, responsive web applications built with React, Next.js, and cutting-edge technologies.',
+      description: 'Modern, responsive web applications built with React, Next.js, and cutting-edge technologies.',
     },
     {
       icon: (
@@ -40,7 +40,7 @@ const Services = () => {
       title: {
         name: 'Backend Development',
       },
-      description: '       Robust, scalable APIs and backend services using Java Spring Boot and modern architectures.',
+      description: 'Robust, scalable APIs and backend services using Java Spring Boot and modern architectures.',
     },
     {
       icon: (
@@ -52,7 +52,7 @@ const Services = () => {
       title: {
         name: 'Mobile Development',
       },
-      description: ' Cross-platform mobile apps with Flutter delivering native performance and beautiful interfaces.',
+      description: 'Cross-platform mobile apps with Flutter delivering native performance and beautiful interfaces.',
     },
     {
       icon: (

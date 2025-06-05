@@ -11,7 +11,6 @@ const Header = () => {
               <Code className="w-5 h-5 text-white" />
             </div>
             <span className="text-xl font-bold text-dark">Kodelab</span>
-            <span className="text-sm text-dark">d.o.o</span>
           </div>
           <Navigation />
         </nav>
