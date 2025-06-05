@@ -1,6 +1,6 @@
 import { Lightbulb, Rocket, Users } from 'lucide-react';
 
-import { CardInfo } from '@/types';
+import { CardContentVariant } from '@/enums';
 import { generateCardContent } from '@/uiUtils';
 
 const HowWeHelpHeading = () => {
@@ -26,7 +26,10 @@ const HowWeHelp = () => {
           <Rocket className={iconClass} />
         </div>
       ),
-      title: 'Product Development',
+      title: {
+        name: 'Product Development',
+        url: '/products',
+      },
       description:
         'From MVPs to enterprise platforms, we design and build scalable digital products that grow with your business needs.',
     },
@@ -36,7 +39,10 @@ const HowWeHelp = () => {
           <Users className={iconClass} />
         </div>
       ),
-      title: 'Meet the Team',
+      title: {
+        name: 'Meet the Team',
+        url: '/team',
+      },
       description:
         'Behind every solution is a passionate team of engineers, designers, and strategists dedicated to your success.',
     },
@@ -46,7 +52,10 @@ const HowWeHelp = () => {
           <Lightbulb className={iconClass} />
         </div>
       ),
-      title: 'Our Philosophy',
+      title: {
+        name: 'Our Philosophy',
+        url: '/about-us',
+      },
       description:
         'Discover how we approach every challenge with craftsmanship, clarity, and care for long-term success.',
     },
@@ -56,7 +65,9 @@ const HowWeHelp = () => {
     <section className="py-20 bg-white">
       <div className="container mx-auto px-4">
         <HowWeHelpHeading />
-        <div className="grid md:grid-cols-3 gap-8 text-center">{generateCardContent(cards)}</div>
+        <div className="grid md:grid-cols-3 gap-8 text-center">
+          {generateCardContent(cards, CardContentVariant.HowWeHelp)}
+        </div>
       </div>
     </section>
   );

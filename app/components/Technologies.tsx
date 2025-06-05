@@ -1,6 +1,5 @@
 import { Cloud, Code, Database, Smartphone } from 'lucide-react';
 
-import { CardInfo } from '@/types';
 import { generateCardContent } from '@/uiUtils';
 
 const MainHeading = () => {
@@ -27,7 +26,9 @@ const Technologies = () => {
           <Code className={iconClass} />{' '}
         </div>
       ),
-      title: 'React',
+      title: {
+        name: 'React',
+      },
       description:
         'We use React to build fast, responsive UIs that scale across devices and provide exceptional user experiences.',
     },
@@ -38,7 +39,9 @@ const Technologies = () => {
           <Database className={iconClass} />{' '}
         </div>
       ),
-      title: 'Java Spring Boot',
+      title: {
+        name: 'Java Spring Boot',
+      },
       description:
         'Spring Boot powers our backend services for robust, scalable APIs that handle enterprise-level demands.',
     },
@@ -49,7 +52,9 @@ const Technologies = () => {
           <Smartphone className={iconClass} />{' '}
         </div>
       ),
-      title: 'Flutter',
+      title: {
+        name: 'Flutter',
+      },
       description:
         'With Flutter, we deliver cross-platform mobile apps with native performance and beautiful interfaces.',
     },
@@ -60,7 +65,9 @@ const Technologies = () => {
           <Cloud className={iconClass} />{' '}
         </div>
       ),
-      title: 'Amazon Web Services',
+      title: {
+        name: 'Amazon Web Services',
+      },
       description: 'We deploy, scale, and secure applications using AWS cloud infrastructure and managed services.',
     },
   ];

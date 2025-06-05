@@ -1,9 +1,12 @@
 import { Code } from 'lucide-react';
-
-import { createUrl } from '@/utils';
+import Link from 'next/link';
 
 const Footer = () => {
-  const footerLinks: string[] = ['Privacy Policy', 'Portfolio', 'Meet the Team'];
+  const footerLinks: LayoutLink[] = [
+    { label: 'Privacy Policy', url: '/privacy-policy' },
+    { label: 'Portfolio', url: '/products' },
+    { label: 'Meet the Team', url: '/team' },
+  ];
   const urlClass = 'text-background-secondary hover:text-emerald-400 transition-colors';
 
   return (
@@ -19,11 +22,11 @@ const Footer = () => {
           <div className="text-center md:text-left">
             <p className="text-background-secondary mb-2">© 2025 Dream Bigger. All rights reserved.</p>
             <div className="flex flex-wrap justify-center md:justify-start gap-6 text-sm">
-              {footerLinks.map((footerLink: string, index: number) => {
+              {footerLinks.map((footerLink: LayoutLink, index: number) => {
                 return (
-                  <a key={footerLink + '-' + index} href={createUrl(footerLink)} className={urlClass}>
-                    {footerLink}
-                  </a>
+                  <Link key={footerLink.label + '-' + index} href={footerLink.url} className={urlClass}>
+                    {footerLink.label}
+                  </Link>
                 );
               })}
             </div>

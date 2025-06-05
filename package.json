@@ -17,7 +17,8 @@
     "next": "^14.2.29",
     "prettier": "^3.5.3",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "zod": "^3.25.51"
   },
   "devDependencies": {
     "@types/node": "^20",
