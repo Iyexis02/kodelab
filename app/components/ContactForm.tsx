@@ -12,7 +12,7 @@ import { phoneCodes } from '@/constants';
 import { BudgetRange, CareerPosition, InquiryType, ProjectType, Timeline } from '@/enums';
 import { contactFormSchema } from '@/utils';
 
-type ContactFormData = z.infer<typeof contactFormSchema>;
+export type ContactFormData = z.infer<typeof contactFormSchema>;
 
 type ContactFormProps = {
   onSubmit?: (data: ContactFormData) => void;
@@ -38,11 +38,17 @@ export function ContactForm({ onSubmit, isModal = false }: ContactFormProps) {
   const [errors, setErrors] = useState<Partial<Record<keyof ContactFormData, string>>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const handleInputChange = (field: keyof ContactFormData, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
+    // Clear error when user starts typing
     if (errors[field]) {
       setErrors((prev) => ({ ...prev, [field]: undefined }));
+    }
+    // Clear submit error if there was one
+    if (submitError) {
+      setSubmitError(null);
     }
   };
 
@@ -50,23 +56,35 @@ export function ContactForm({ onSubmit, isModal = false }: ContactFormProps) {
     e.preventDefault();
     setIsSubmitting(true);
     setErrors({});
+    setSubmitError(null);
 
     try {
       // Validate form data
       const validatedData = contactFormSchema.parse(formData);
 
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      // Send data to API route
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(validatedData),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message || 'Failed to submit form');
+      }
 
       // Call onSubmit if provided
       if (onSubmit) {
         onSubmit(validatedData);
-      } else {
-        console.log('Form submitted:', validatedData);
       }
 
       setIsSubmitted(true);
 
+      // Reset form after successful submission
       setTimeout(() => {
         setFormData({
           firstName: '',
@@ -93,6 +111,8 @@ export function ContactForm({ onSubmit, isModal = false }: ContactFormProps) {
           }
         });
         setErrors(fieldErrors);
+      } else {
+        setSubmitError(error instanceof Error ? error.message : 'An unexpected error occurred');
       }
     } finally {
       setIsSubmitting(false);
