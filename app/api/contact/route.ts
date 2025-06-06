@@ -95,7 +95,7 @@ export async function POST(request: Request) {
     // Send the email
     await transporter.sendMail(mailOptions);
 
-    return NextResponse.json({ success: true, message: 'Email sent successfully' });
+    return NextResponse.json({ success: true, message: 'Email sent successfully' }, { status: 200 });
   } catch (error) {
     console.error('Error sending email:', error);
     return NextResponse.json({ success: false, message: 'Failed to send email' }, { status: 500 });
