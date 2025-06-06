@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 
 import { ContactFormData } from '@/app/components/ContactForm';
+import { InquiryType } from '@/enums';
 
 export async function POST(request: Request) {
   try {
@@ -23,13 +24,13 @@ export async function POST(request: Request) {
     const subject = `New Contact Form Submission: ${formData.inquiryType}`;
     let messageDetails = '';
 
-    if (formData.inquiryType === 'Project Development') {
+    if (formData.inquiryType === InquiryType.ProjectDevelopment) {
       messageDetails = `
         Project Type: ${formData.projectType || 'Not specified'}
         Budget: ${formData.budget || 'Not specified'}
         Timeline: ${formData.timeline || 'Not specified'}
       `;
-    } else if (formData.inquiryType === 'Career Opportunities') {
+    } else if (formData.inquiryType === InquiryType.CareerOpportunities) {
       messageDetails = `
         Position: ${formData.careerPosition || 'Not specified'}
       `;
@@ -73,7 +74,7 @@ export async function POST(request: Request) {
         <h3>Inquiry Details:</h3>
         <p><strong>Type:</strong> ${formData.inquiryType}</p>
         ${
-          formData.inquiryType === 'Project Development'
+          formData.inquiryType === InquiryType.ProjectDevelopment
             ? `
               <ul>
                 <li><strong>Project Type:</strong> ${formData.projectType || 'Not specified'}</li>
@@ -81,7 +82,7 @@ export async function POST(request: Request) {
                 <li><strong>Timeline:</strong> ${formData.timeline || 'Not specified'}</li>
               </ul>
             `
-            : formData.inquiryType === 'Career Opportunities'
+            : formData.inquiryType === InquiryType.CareerOpportunities
               ? `<p><strong>Position:</strong> ${formData.careerPosition || 'Not specified'}</p>`
               : ''
         }
