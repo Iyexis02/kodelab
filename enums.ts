@@ -51,3 +51,25 @@ export enum Timeline {
   AboveSixMonths = '6+ months',
   Flexible = 'Flexible',
 }
+
+export enum ContactFormType {
+  Default = 'default',
+  Contact = 'contact',
+  Careers = 'careers',
+  Project = 'project',
+  Consultation = 'consultaion',
+}
+
+export enum ContactButtonVariant {
+  Default = 'default',
+  Outline = 'outline',
+  Secondary = 'secondary',
+  Ghost = 'ghost',
+}
+
+export enum ContactButtonSize {
+  Default = 'default',
+  Small = 'sm',
+  Large = 'lg',
+  Icon = 'icon',
+}

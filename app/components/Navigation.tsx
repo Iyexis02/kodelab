@@ -7,6 +7,8 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
+import { ContactFormType } from '@/enums';
+
 const Navigation = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navClass = 'text-dark hover:text-dark transition-colors';
@@ -55,7 +57,7 @@ const Navigation = () => {
 
   const handleContactClick = () => {
     setIsMobileMenuOpen(false);
-    openContactForm();
+    openContactForm(ContactFormType.Default);
   };
 
   const handleNavClick = () => {
@@ -78,7 +80,7 @@ const Navigation = () => {
           );
         })}
         <Button
-          onClick={openContactForm}
+          onClick={() => openContactForm(ContactFormType.Default)}
           size="sm"
           className="bg-emerald-600 hover:bg-emerald-700 text-background-primary px-4 py-4 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
           Contact us

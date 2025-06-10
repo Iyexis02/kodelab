@@ -3,6 +3,7 @@ import React from 'react';
 
 import { ContactButton } from '@/app/components/ContactButton';
 import { Card, CardContent, CardHeader, CardTitle } from '@/app/components/ui/Card';
+import { ContactFormType } from '@/enums';
 
 const MainServices = () => {
   const mainServices = [
@@ -142,7 +143,7 @@ const MainServices = () => {
                       </div>
 
                       <ContactButton
-                        type="project"
+                        type={ContactFormType.Project}
                         className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 font-semibold rounded-xl transition-all duration-300">
                         Get Started
                         <ArrowRight className="ml-2 w-4 h-4" />

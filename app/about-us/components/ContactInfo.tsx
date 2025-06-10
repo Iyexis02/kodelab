@@ -10,7 +10,7 @@ const ContactInfo = () => {
         <div className="text-center mb-12 md:mb-16">
           <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">Get in Touch</h2>
           <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
-            Ready to start your next project or have questions about our services? We'd love to hear from you.
+            {"Ready to start your next project or have questions about our services? We'd love to hear from you."}
           </p>
         </div>
 

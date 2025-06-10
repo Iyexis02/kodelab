@@ -32,13 +32,14 @@ const Story = () => {
                   digital presence and decided to build a company that could bridge that gap.
                 </p>
                 <p>
-                  What started as a small team of two has grown into a diverse group of talented professionals, each
-                  bringing unique skills and perspectives to every project. We've had the privilege of working with
-                  startups, established businesses, and everything in between.
+                  {
+                    "What started as a small team of two has grown into a diverse group of talented professionals, each bringing unique skills and perspectives to every project. We've had the privilege of working with startups, established businesses, and everything in between."
+                  }
                 </p>
                 <p>
-                  Today, we continue to push the boundaries of what's possible in web and mobile development, always
-                  staying ahead of the curve with the latest technologies and best practices.
+                  {
+                    "Today, we continue to push the boundaries of what's possible in web and mobile development, always staying ahead of the curve with the latest technologies and best practices."
+                  }
                 </p>
               </div>
             </div>

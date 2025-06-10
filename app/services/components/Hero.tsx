@@ -1,8 +1,8 @@
 import { ArrowRight, Users } from 'lucide-react';
-import React from 'react';
 
 import { ContactButton } from '@/app/components/ContactButton';
 import { Button } from '@/app/components/ui/Button';
+import { ContactButtonSize, ContactFormType } from '@/enums';
 
 const Hero = () => {
   return (
@@ -23,19 +23,19 @@ const Hero = () => {
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <ContactButton
-            type="project"
-            size="lg"
+            type={ContactFormType.Project}
+            size={ContactButtonSize.Large}
             className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 md:px-8 py-3 md:py-4 text-base md:text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
             Start Your Project
             <ArrowRight className="ml-2 w-4 md:w-5 h-4 md:h-5" />
           </ContactButton>
-          <Button
-            variant="outline"
-            size="lg"
-            className="border-2 border-white/30 text-white hover:bg-white/10 px-6 md:px-8 py-3 md:py-4 text-base md:text-lg font-semibold rounded-xl backdrop-blur-sm">
+          <ContactButton
+            type={ContactFormType.Consultation}
+            size={ContactButtonSize.Large}
+            className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 md:px-8 py-3 md:py-4 text-base md:text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
             <Users className="mr-2 w-4 md:w-5 h-4 md:h-5" />
             Schedule Consultation
-          </Button>
+          </ContactButton>
         </div>
       </div>
     </section>

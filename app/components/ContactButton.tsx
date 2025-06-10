@@ -3,20 +3,22 @@
 import { useModal } from '../contexts/ModalContext';
 import { Button } from './ui/Button';
 
-interface ContactButtonProps {
-  variant?: 'default' | 'outline' | 'secondary' | 'ghost';
-  size?: 'default' | 'sm' | 'lg' | 'icon';
+import { ContactButtonSize, ContactButtonVariant, ContactFormType } from '@/enums';
+
+type ContactButtonProps = {
+  variant?: ContactButtonVariant;
+  size?: ContactButtonSize;
   className?: string;
   children?: React.ReactNode;
-  type?: 'contact' | 'careers' | 'project';
-}
+  type?: ContactFormType;
+};
 
 export function ContactButton({
-  variant = 'default',
-  size = 'default',
+  variant = ContactButtonVariant.Default,
+  size = ContactButtonSize.Default,
   className = '',
   children,
-  type = 'contact',
+  type = ContactFormType.Contact,
 }: ContactButtonProps) {
   const { openContactForm } = useModal();
 
@@ -24,9 +26,9 @@ export function ContactButton({
     if (children) return children;
 
     switch (type) {
-      case 'careers':
+      case ContactFormType.Careers:
         return 'Join Our Team';
-      case 'project':
+      case ContactFormType.Project:
         return 'Start a Project';
       default:
         return 'Contact Us';
@@ -34,7 +36,7 @@ export function ContactButton({
   };
 
   return (
-    <Button variant={variant} size={size} onClick={openContactForm} className={className}>
+    <Button variant={variant} size={size} onClick={() => openContactForm(type)} className={className}>
       {getButtonText()}
     </Button>
   );

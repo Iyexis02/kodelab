@@ -1,7 +1,14 @@
+'use client';
+
+import { ContactButton } from './ContactButton';
 import { Button } from './ui/Button';
 import { ArrowRight } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+
+import { ContactButtonSize, ContactFormType } from '@/enums';
 
 const Hero = () => {
+  const router = useRouter();
   return (
     <section className="relative bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 text-white py-24 md:py-32">
       <div className="absolute inset-0 opacity-10">
@@ -18,14 +25,18 @@ const Hero = () => {
           We build scalable, modern web and mobile solutions using proven technologies that drive your business forward.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button
-            size="lg"
+          <ContactButton
+            type={ContactFormType.Contact}
+            size={ContactButtonSize.Large}
             className="bg-emerald-600 hover:bg-emerald-700 text-background-primary px-8 py-4 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
             Book a free consultation
             <ArrowRight className="ml-2 w-5 h-5" />
-          </Button>
+          </ContactButton>
           <Button
-            size="lg"
+            onClick={() => {
+              router.push('/products');
+            }}
+            size={ContactButtonSize.Large}
             className="bg-emerald-600 hover:bg-emerald-700 text-background-primary px-8 py-4 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
             {"See what we've built"}
           </Button>

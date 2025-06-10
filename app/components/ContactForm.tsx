@@ -1,5 +1,6 @@
 'use client';
 
+import { useModal } from '../contexts/ModalContext';
 import { Button } from './ui/Button';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/Card';
 import { Input } from './ui/Input';
@@ -9,7 +10,7 @@ import { useState } from 'react';
 import { z } from 'zod';
 
 import { phoneCodes } from '@/constants';
-import { BudgetRange, CareerPosition, InquiryType, ProjectType, Timeline } from '@/enums';
+import { BudgetRange, CareerPosition, ContactFormType, InquiryType, ProjectType, Timeline } from '@/enums';
 import { contactFormSchema } from '@/utils';
 
 export type ContactFormData = z.infer<typeof contactFormSchema>;
@@ -20,25 +21,96 @@ type ContactFormProps = {
 };
 
 export function ContactForm({ onSubmit, isModal = false }: ContactFormProps) {
-  const [formData, setFormData] = useState<ContactFormData>({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phoneCode: '+385',
-    phoneNumber: '',
-    company: '',
-    inquiryType: '',
-    projectType: '',
-    careerPosition: '',
-    budget: '',
-    timeline: '',
-    message: '',
-  });
+  const { modalContent } = useModal();
+  const preGeneratedMessage = 'I would like to schedule a free consultation to discuss my queries.';
+
+  const generateDefaultData = () => {
+    switch (modalContent) {
+      case ContactFormType.Careers:
+        return {
+          firstName: '',
+          lastName: '',
+          email: '',
+          phoneCode: '+385',
+          phoneNumber: '',
+          company: '',
+          inquiryType: InquiryType.CareerOpportunities,
+          projectType: '',
+          careerPosition: '',
+          budget: '',
+          timeline: '',
+          message: '',
+        };
+      case ContactFormType.Project:
+        return {
+          firstName: '',
+          lastName: '',
+          email: '',
+          phoneCode: '+385',
+          phoneNumber: '',
+          company: '',
+          inquiryType: InquiryType.ProjectDevelopment,
+          projectType: '',
+          careerPosition: '',
+          budget: '',
+          timeline: '',
+          message: '',
+        };
+      case ContactFormType.Contact:
+        return {
+          firstName: '',
+          lastName: '',
+          email: '',
+          phoneCode: '+385',
+          phoneNumber: '',
+          company: '',
+          inquiryType: InquiryType.GeneralInformation,
+          projectType: '',
+          careerPosition: '',
+          budget: '',
+          timeline: '',
+          message: preGeneratedMessage,
+        };
+      case ContactFormType.Consultation:
+        return {
+          firstName: '',
+          lastName: '',
+          email: '',
+          phoneCode: '+385',
+          phoneNumber: '',
+          company: '',
+          inquiryType: InquiryType.TechnicalConsulting,
+          projectType: '',
+          careerPosition: '',
+          budget: '',
+          timeline: '',
+          message: '',
+        };
+      default:
+        return {
+          firstName: '',
+          lastName: '',
+          email: '',
+          phoneCode: '+385',
+          phoneNumber: '',
+          company: '',
+          inquiryType: '',
+          projectType: '',
+          careerPosition: '',
+          budget: '',
+          timeline: '',
+          message: '',
+        };
+    }
+  };
+  const [formData, setFormData] = useState<ContactFormData>(generateDefaultData());
 
   const [errors, setErrors] = useState<Partial<Record<keyof ContactFormData, string>>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+
+  console.log('modal content', modalContent);
 
   const handleInputChange = (field: keyof ContactFormData, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -59,10 +131,8 @@ export function ContactForm({ onSubmit, isModal = false }: ContactFormProps) {
     setSubmitError(null);
 
     try {
-      // Validate form data
       const validatedData = contactFormSchema.parse(formData);
 
-      // Send data to API route
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
@@ -77,14 +147,12 @@ export function ContactForm({ onSubmit, isModal = false }: ContactFormProps) {
         throw new Error(result.message || 'Failed to submit form');
       }
 
-      // Call onSubmit if provided
       if (onSubmit) {
         onSubmit(validatedData);
       }
 
       setIsSubmitted(true);
 
-      // Reset form after successful submission
       setTimeout(() => {
         setFormData({
           firstName: '',

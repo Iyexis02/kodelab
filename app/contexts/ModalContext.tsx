@@ -4,11 +4,14 @@ import { ContactForm } from '../components/ContactForm';
 import { ModalSlide } from '../components/ModalSlide';
 import { type ReactNode, createContext, useContext, useState } from 'react';
 
-interface ModalContextType {
-  openContactForm: () => void;
+import { ContactFormType } from '@/enums';
+
+type ModalContextType = {
+  openContactForm: (variant: ContactFormType) => void;
   closeModal: () => void;
   isModalOpen: boolean;
-}
+  modalContent: ContactFormType | null;
+};
 
 const ModalContext = createContext<ModalContextType | undefined>(undefined);
 
@@ -18,10 +21,26 @@ type ModalProviderProps = {
 
 export function ModalProvider({ children }: ModalProviderProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalContent, setModalContent] = useState<'contact' | null>(null);
+  const [modalContent, setModalContent] = useState<ContactFormType | null>(null);
 
-  const openContactForm = () => {
-    setModalContent('contact');
+  const openContactForm = (variant: ContactFormType) => {
+    switch (variant) {
+      case ContactFormType.Careers:
+        setModalContent(ContactFormType.Careers);
+        break;
+      case ContactFormType.Contact:
+        setModalContent(ContactFormType.Contact);
+        break;
+      case ContactFormType.Project:
+        setModalContent(ContactFormType.Project);
+        break;
+      case ContactFormType.Consultation:
+        setModalContent(ContactFormType.Consultation);
+        break;
+      case ContactFormType.Default:
+        setModalContent(ContactFormType.Default);
+        break;
+    }
     setIsModalOpen(true);
   };
 
@@ -37,9 +56,9 @@ export function ModalProvider({ children }: ModalProviderProps) {
   };
 
   return (
-    <ModalContext.Provider value={{ openContactForm, closeModal, isModalOpen }}>
+    <ModalContext.Provider value={{ openContactForm, closeModal, isModalOpen, modalContent }}>
       {children}
-      <ModalSlide isOpen={isModalOpen && modalContent === 'contact'} onClose={closeModal} title="Contact Us">
+      <ModalSlide isOpen={isModalOpen && modalContent !== null} onClose={closeModal} title="Contact Us">
         <ContactForm onSubmit={handleFormSubmit} isModal={true} />
       </ModalSlide>
     </ModalContext.Provider>
