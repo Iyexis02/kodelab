@@ -1,6 +1,7 @@
 import { Lightbulb, Rocket, Users } from 'lucide-react';
 
 import { CardContentVariant } from '@/enums';
+import { CardInfo } from '@/types';
 import { generateCardContent } from '@/uiUtils';
 
 const HowWeHelpHeading = () => {

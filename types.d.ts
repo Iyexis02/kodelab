@@ -1,3 +1,6 @@
+import { ProjectStatus } from './enums';
+import { ReactNode } from 'react';
+
 type CardTitle = {
   name: string;
   url?: string | undefined;
@@ -32,4 +35,25 @@ type Employee = {
 type LayoutLink = {
   label: string;
   url: string;
+};
+
+type Project = {
+  id: string;
+  name: string;
+  client: string;
+  category: string;
+  description: string;
+  image: string | null;
+  dateCompleted: string;
+  duration: string;
+  teamSize: string;
+  features: string[];
+  technologies: string[];
+  results: string[];
+  gradient: string;
+  icon: string;
+  productionUrl: string | null;
+  caseStudyUrl: string | null;
+  projectStatus: ProjectStatus;
+  order: number | null;
 };

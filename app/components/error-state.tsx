@@ -2,22 +2,52 @@
 
 import { Button } from './ui/Button';
 import { Card, CardContent } from './ui/Card';
-import { AlertCircle, RefreshCw } from 'lucide-react';
+import { AlertCircle, Briefcase, Code, RefreshCw } from 'lucide-react';
 
 type ErrorStateProps = {
   title?: string;
   message: string;
   onRetry?: () => void;
   showRetry?: boolean;
+  type?: 'products' | 'team' | 'general';
 };
 
-export function ErrorState({ title = 'Something went wrong', message, onRetry, showRetry = true }: ErrorStateProps) {
+export function ErrorState({
+  title = 'Something went wrong',
+  message,
+  onRetry,
+  showRetry = true,
+  type = 'general',
+}: ErrorStateProps) {
+  const getIcon = () => {
+    switch (type) {
+      case 'products':
+        return <Briefcase className="w-8 h-8 text-white" />;
+      case 'team':
+        return <Code className="w-8 h-8 text-white" />;
+      default:
+        return <AlertCircle className="w-8 h-8 text-white" />;
+    }
+  };
+
+  const getGradient = () => {
+    switch (type) {
+      case 'products':
+        return 'from-emerald-500 to-blue-500';
+      case 'team':
+        return 'from-blue-500 to-purple-500';
+      default:
+        return 'from-red-500 to-orange-500';
+    }
+  };
+
   return (
     <div className="flex justify-center items-center min-h-[400px]">
       <Card className="max-w-md w-full shadow-lg border-0">
         <CardContent className="p-8 text-center">
-          <div className="w-16 h-16 bg-gradient-to-br from-red-500 to-orange-500 rounded-full flex items-center justify-center mx-auto mb-6">
-            <AlertCircle className="w-8 h-8 text-white" />
+          <div
+            className={`w-16 h-16 bg-gradient-to-br ${getGradient()} rounded-full flex items-center justify-center mx-auto mb-6`}>
+            {getIcon()}
           </div>
 
           <h3 className="text-xl font-bold text-gray-900 mb-4">{title}</h3>

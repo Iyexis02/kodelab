@@ -73,3 +73,10 @@ export enum ContactButtonSize {
   Large = 'lg',
   Icon = 'icon',
 }
+
+export enum ProjectStatus {
+  Completed = 'Completed',
+  InProgress = 'In Progress',
+  Maintenance = 'Maintenance',
+  Archived = 'Archived',
+}

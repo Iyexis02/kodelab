@@ -1,6 +1,8 @@
 import { Code } from 'lucide-react';
 import Link from 'next/link';
 
+import { LayoutLink } from '@/types';
+
 const Footer = () => {
   const footerLinks: LayoutLink[] = [
     { label: 'Privacy Policy', url: '/privacy-policy' },

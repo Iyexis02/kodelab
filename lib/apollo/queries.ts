@@ -17,4 +17,33 @@ const GET_EMPLOYEES = gql`
   }
 `;
 
-export { GET_EMPLOYEES };
+const GET_PRODUCTS = gql`
+  query GetAllProducts {
+    allProducts {
+      id
+      name
+      client
+      category
+      description
+      image {
+        url
+        alt
+      }
+      dateCompleted
+      duration
+      teamSize
+      features
+      technologies
+      results
+      gradient
+      icon
+      productionUrl
+      caseStudyUrl
+      featured
+      projectStatus
+      order
+    }
+  }
+`;
+
+export { GET_EMPLOYEES, GET_PRODUCTS };

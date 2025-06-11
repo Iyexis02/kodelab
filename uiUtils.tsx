@@ -1,5 +1,6 @@
 import { Card, CardContent } from './app/components/ui/Card';
 import { CardContentVariant } from './enums';
+import { CardInfo } from './types';
 import Link from 'next/link';
 
 type CardProps = {

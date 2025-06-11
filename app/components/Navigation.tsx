@@ -8,6 +8,7 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 import { ContactFormType } from '@/enums';
+import { LayoutLink } from '@/types';
 
 const Navigation = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);

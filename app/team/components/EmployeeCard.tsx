@@ -2,6 +2,7 @@ import { Github, Linkedin, Mail, Twitter } from 'lucide-react';
 
 import { Button } from '@/app/components/ui/Button';
 import { Card, CardContent } from '@/app/components/ui/Card';
+import { Employee } from '@/types';
 
 type TeamCardProps = {
   employee: Employee;
