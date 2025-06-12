@@ -68,3 +68,23 @@ type Testimonial = {
   avatar: string | null;
   project: string;
 };
+
+type Milestone = {
+  id: string;
+  year: string;
+  title: string;
+  description: string;
+};
+
+type CompanyValue = {
+  id: string;
+  icon: string;
+  title: string;
+  description: string;
+};
+
+type Stats = {
+  id: string;
+  label: string;
+  value: string;
+};

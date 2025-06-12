@@ -2,10 +2,10 @@
 
 import { useModal } from '../contexts/ModalContext';
 import { Button } from './ui/Button';
-import { ArrowRight, Briefcase, Code, Home, Mail, Menu, Phone, Users, X } from 'lucide-react';
+import { ArrowRight, Briefcase, Code, Home, LucideProps, Mail, Menu, Phone, Users, X } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { ForwardRefExoticComponent, RefAttributes, useEffect, useState } from 'react';
 
 import { ContactFormType } from '@/enums';
 import { LayoutLink } from '@/types';
@@ -17,7 +17,7 @@ const Navigation = () => {
   type NavItem = {
     label: string;
     url: string;
-    icon: React.ElementType;
+    icon: ForwardRefExoticComponent<Omit<LucideProps, 'ref'> & RefAttributes<SVGSVGElement>>;
   };
 
   const navConfig: NavItem[] = [
@@ -153,7 +153,7 @@ const Navigation = () => {
               <h3 className="text-sm font-semibold text-gray-900 mb-2">Quick Info</h3>
               <div className="space-y-2 text-sm text-gray-600">
                 <p>📧 info@kodelab.com</p>
-                <p>📍 Zagreb, Croatia</p>
+                <p>📍 Buzin, Croatia</p>
                 <p>🕒 Mon-Fri 9:00-17:00</p>
               </div>
             </div>

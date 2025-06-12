@@ -22,7 +22,7 @@ const ContactInfo = () => {
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-3">Location</h3>
               <p className="text-gray-600">
-                Zagreb, Croatia
+                Buzin, Croatia
                 <br />
                 Central Europe
               </p>

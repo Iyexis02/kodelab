@@ -2,7 +2,7 @@
 
 import { Button } from './ui/Button';
 import { Card, CardContent } from './ui/Card';
-import { AlertCircle, Briefcase, Code, MessageCircle, RefreshCw } from 'lucide-react';
+import { AlertCircle, Briefcase, Calendar, Code, Heart, MessageCircle, RefreshCw } from 'lucide-react';
 
 import { ErrorStateType } from '@/enums';
 
@@ -29,6 +29,10 @@ export function ErrorState({
         return <Code className="w-8 h-8 text-white" />;
       case ErrorStateType.Testimonials:
         return <MessageCircle className="w-8 h-8 text-white" />;
+      case ErrorStateType.Milestones:
+        return <Calendar className="w-8 h-8 text-white" />;
+      case ErrorStateType.Values:
+        return <Heart className="w-8 h-8 text-white" />;
       default:
         return <AlertCircle className="w-8 h-8 text-white" />;
     }
@@ -42,6 +46,10 @@ export function ErrorState({
         return 'from-blue-500 to-purple-500';
       case ErrorStateType.Testimonials:
         return 'from-emerald-500 to-blue-600';
+      case ErrorStateType.Milestones:
+        return 'from-blue-500 to-purple-500';
+      case ErrorStateType.Values:
+        return 'from-emerald-500 to-green-500';
       default:
         return 'from-red-500 to-orange-500';
     }
@@ -66,6 +74,27 @@ export function ErrorState({
               <RefreshCw className="mr-2 w-4 h-4" />
               Try Again
             </Button>
+          )}
+
+          {type === ErrorStateType.Milestones && (
+            <div className="mt-8 relative">
+              <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-gray-200 transform -translate-x-1/2"></div>
+              <div className="flex justify-center mb-4">
+                <div className="w-4 h-4 bg-gray-200 rounded-full relative z-10"></div>
+              </div>
+              <div className="flex justify-center">
+                <div className="w-4 h-4 bg-gray-200 rounded-full relative z-10"></div>
+              </div>
+            </div>
+          )}
+
+          {type === ErrorStateType.Values && (
+            <div className="mt-8 grid grid-cols-2 gap-3">
+              <div className="h-12 bg-gray-100 rounded-lg"></div>
+              <div className="h-12 bg-gray-100 rounded-lg"></div>
+              <div className="h-12 bg-gray-100 rounded-lg"></div>
+              <div className="h-12 bg-gray-100 rounded-lg"></div>
+            </div>
           )}
         </CardContent>
       </Card>

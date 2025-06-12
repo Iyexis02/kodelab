@@ -1,12 +1,36 @@
-import React from 'react';
+'use client';
+
+import StatsCard from './StatsCard';
+import { useQuery } from '@apollo/client';
+
+import { ErrorState } from '@/app/components/error-state';
+import { StorySkeletonSection } from '@/app/components/skeleton-loader';
+import { ErrorStateType } from '@/enums';
+import { GET_STATS } from '@/lib/apollo/queries';
+import { Stats } from '@/types';
 
 const Story = () => {
-  const stats = [
-    { number: '50+', label: 'Projects Completed' },
-    { number: '6', label: 'Team Members' },
-    { number: '5', label: 'Years Experience' },
-    { number: '100%', label: 'Client Satisfaction' },
-  ];
+  const { loading, error, data, refetch } = useQuery(GET_STATS);
+  const stats: Stats[] = data?.allStats ?? [];
+
+  if (loading) {
+    return <StorySkeletonSection />;
+  }
+
+  if (error) {
+    return (
+      <section className="py-16 md:py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <ErrorState
+            title="Unable to load our story"
+            message={`We're having trouble loading our company story. ${error.message}`}
+            onRetry={() => refetch()}
+            type={ErrorStateType.Stats}
+          />
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="py-16 md:py-20 bg-white">
@@ -47,12 +71,7 @@ const Story = () => {
             <div className="relative">
               <div className="bg-gradient-to-br from-emerald-500 to-blue-600 rounded-2xl p-8 text-white">
                 <div className="grid grid-cols-2 gap-6">
-                  {stats.map((stat, index) => (
-                    <div key={index} className="text-center">
-                      <div className="text-2xl md:text-3xl font-bold mb-2">{stat.number}</div>
-                      <div className="text-sm md:text-base text-white/80">{stat.label}</div>
-                    </div>
-                  ))}
+                  {stats?.map((stat) => <StatsCard key={stat.id} stat={stat} />)}
                 </div>
               </div>
             </div>

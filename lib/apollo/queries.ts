@@ -64,4 +64,36 @@ const GET_TESTIMONIALS = gql`
   }
 `;
 
-export { GET_EMPLOYEES, GET_PRODUCTS, GET_TESTIMONIALS };
+const GET_MILESTONES = gql`
+  query GetAllMilestones {
+    allMilestones(orderBy: year_ASC) {
+      id
+      year
+      title
+      description
+    }
+  }
+`;
+
+const GET_COMPANY_VALUES = gql`
+  query GetAllCompanyvalues {
+    allCompanyvalues {
+      id
+      icon
+      title
+      description
+    }
+  }
+`;
+
+const GET_STATS = gql`
+  query GetAllStats {
+    allStats {
+      id
+      value
+      label
+    }
+  }
+`;
+
+export { GET_EMPLOYEES, GET_PRODUCTS, GET_TESTIMONIALS, GET_MILESTONES, GET_COMPANY_VALUES, GET_STATS };

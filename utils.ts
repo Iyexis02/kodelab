@@ -1,3 +1,4 @@
+import * as LucideIcons from 'lucide-react';
 import z from 'zod';
 
 const createUrl = (url: string) => {
@@ -38,4 +39,16 @@ const contactFormSchema = z.object({
     .max(1000, 'Message must be less than 1000 characters'),
 });
 
-export { createUrl, contactFormSchema };
+const getIconComponent = (
+  iconName: string
+): React.ForwardRefExoticComponent<Omit<LucideIcons.LucideProps, 'ref'> & React.RefAttributes<SVGSVGElement>> => {
+  if (!iconName || typeof iconName !== 'string') {
+    return LucideIcons.Code;
+  }
+
+  const LucideIcon = (LucideIcons as keyof object)[iconName];
+
+  return LucideIcon || LucideIcons.Code;
+};
+
+export { createUrl, contactFormSchema, getIconComponent };

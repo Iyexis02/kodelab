@@ -86,4 +86,7 @@ export enum ErrorStateType {
   Team = 'team',
   General = 'general',
   Testimonials = 'testimonials',
+  Milestones = 'milestones',
+  Values = 'values',
+  Stats = 'stats',
 }
