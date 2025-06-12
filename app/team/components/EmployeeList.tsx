@@ -5,6 +5,7 @@ import { useQuery } from '@apollo/client';
 
 import { ErrorState } from '@/app/components/error-state';
 import { TeamGridSkeleton } from '@/app/components/skeleton-loader';
+import { ErrorStateType } from '@/enums';
 import { GET_EMPLOYEES } from '@/lib/apollo/queries';
 import { Employee } from '@/types';
 
@@ -19,7 +20,7 @@ const EmployeeList = () => {
   if (error) {
     return (
       <ErrorState
-        type="team"
+        type={ErrorStateType.Team}
         title="Unable to load team members"
         message={`We're having trouble loading the team information. ${error.message}`}
         onRetry={() => refetch()}
@@ -30,7 +31,7 @@ const EmployeeList = () => {
   if (employees?.length === 0) {
     return (
       <ErrorState
-        type="team"
+        type={ErrorStateType.Team}
         title="No team members found"
         message="It looks like there are no team members to display at the moment."
         showRetry={false}

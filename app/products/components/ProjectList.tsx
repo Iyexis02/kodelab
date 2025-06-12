@@ -7,6 +7,7 @@ import type React from 'react';
 
 import { ErrorState } from '@/app/components/error-state';
 import { PortfolioGridSkeleton } from '@/app/components/skeleton-loader';
+import { ErrorStateType } from '@/enums';
 import { GET_PRODUCTS } from '@/lib/apollo/queries';
 import type { Project } from '@/types';
 
@@ -14,22 +15,15 @@ const ProjectList = () => {
   const { loading, error, data, refetch } = useQuery(GET_PRODUCTS);
   const projects: Project[] = data?.allProducts ?? [];
 
-  // Function to get the Lucide icon component from a string name
   const getIconComponent = (
     iconName: string
   ): React.ForwardRefExoticComponent<Omit<LucideIcons.LucideProps, 'ref'> & React.RefAttributes<SVGSVGElement>> => {
-    // Default to a fallback icon if the name doesn't exist or is invalid
     if (!iconName || typeof iconName !== 'string') {
       return LucideIcons.Code;
     }
 
-    // Try to get the icon from Lucide
-    // First letter uppercase, rest lowercase to match Lucide's naming convention
-    console.log('formatted', iconName);
-    // Check if the icon exists in Lucide
     const LucideIcon = (LucideIcons as keyof object)[iconName];
 
-    // Return the icon if it exists, otherwise return a fallback
     return LucideIcon || LucideIcons.Code;
   };
 
@@ -43,7 +37,7 @@ const ProjectList = () => {
         title="Unable to load products"
         message={`We're having trouble loading the company portfolio. ${error.message}`}
         onRetry={() => refetch()}
-        type="products"
+        type={ErrorStateType.Products}
       />
     );
   }
@@ -54,7 +48,7 @@ const ProjectList = () => {
         title="No products found"
         message="It looks like there are no products to display at the moment."
         showRetry={false}
-        type="products"
+        type={ErrorStateType.Products}
       />
     );
   }

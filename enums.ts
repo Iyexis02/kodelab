@@ -80,3 +80,10 @@ export enum ProjectStatus {
   Maintenance = 'Maintenance',
   Archived = 'Archived',
 }
+
+export enum ErrorStateType {
+  Products = 'products',
+  Team = 'team',
+  General = 'general',
+  Testimonials = 'testimonials',
+}

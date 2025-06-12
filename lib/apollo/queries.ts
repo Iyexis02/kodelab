@@ -46,4 +46,22 @@ const GET_PRODUCTS = gql`
   }
 `;
 
-export { GET_EMPLOYEES, GET_PRODUCTS };
+const GET_TESTIMONIALS = gql`
+  query GetAllTestimonials {
+    allTestimonials {
+      id
+      name
+      company
+      role
+      content
+      rating
+      avatar {
+        url
+        alt
+      }
+      project
+    }
+  }
+`;
+
+export { GET_EMPLOYEES, GET_PRODUCTS, GET_TESTIMONIALS };

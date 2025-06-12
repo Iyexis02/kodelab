@@ -1,8 +1,8 @@
 'use client';
 
-type SkeletonProps = {
+interface SkeletonProps {
   className?: string;
-};
+}
 
 export function Skeleton({ className = '' }: SkeletonProps) {
   return (
@@ -64,6 +64,38 @@ export function TeamCardSkeleton() {
           <Skeleton className="w-8 md:w-10 h-8 md:h-10 rounded-full" />
           <Skeleton className="w-8 md:w-10 h-8 md:h-10 rounded-full" />
         </div>
+      </div>
+    </div>
+  );
+}
+
+export function TestimonialCardSkeleton() {
+  return (
+    <div className="bg-white rounded-lg shadow-lg border-0 animate-pulse">
+      <div className="p-6 md:p-8">
+        <div className="flex items-center mb-4">
+          {[...Array(5)].map((_, i) => (
+            <Skeleton key={i} className="w-5 h-5 rounded mr-1" />
+          ))}
+        </div>
+
+        <div className="mb-6 space-y-2">
+          <Skeleton className="h-4 w-full" />
+          <Skeleton className="h-4 w-5/6" />
+          <Skeleton className="h-4 w-4/5" />
+          <Skeleton className="h-4 w-3/4" />
+        </div>
+
+        <div className="flex items-center mb-4">
+          <Skeleton className="w-12 h-12 rounded-full mr-4" />
+          <div className="flex-1">
+            <Skeleton className="h-4 w-32 mb-2" />
+            <Skeleton className="h-3 w-40" />
+          </div>
+        </div>
+
+        {/* Project tag skeleton */}
+        <Skeleton className="h-6 w-24 rounded-full" />
       </div>
     </div>
   );
@@ -196,6 +228,16 @@ export function PortfolioGridSkeleton({ count = 3 }: { count?: number }) {
     <div className="space-y-16 md:space-y-24">
       {Array.from({ length: count }).map((_, index) => (
         <PortfolioProjectSkeleton key={index} />
+      ))}
+    </div>
+  );
+}
+
+export function TestimonialsGridSkeleton({ count = 3 }: { count?: number }) {
+  return (
+    <div className="grid md:grid-cols-3 gap-6 md:gap-8">
+      {Array.from({ length: count }).map((_, index) => (
+        <TestimonialCardSkeleton key={index} />
       ))}
     </div>
   );

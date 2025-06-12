@@ -57,3 +57,14 @@ type Project = {
   projectStatus: ProjectStatus;
   order: number | null;
 };
+
+type Testimonial = {
+  id: string;
+  name: string;
+  company: string;
+  role: string;
+  content: string;
+  rating: number;
+  avatar: string | null;
+  project: string;
+};

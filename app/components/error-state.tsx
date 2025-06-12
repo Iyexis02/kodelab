@@ -2,14 +2,16 @@
 
 import { Button } from './ui/Button';
 import { Card, CardContent } from './ui/Card';
-import { AlertCircle, Briefcase, Code, RefreshCw } from 'lucide-react';
+import { AlertCircle, Briefcase, Code, MessageCircle, RefreshCw } from 'lucide-react';
+
+import { ErrorStateType } from '@/enums';
 
 type ErrorStateProps = {
   title?: string;
   message: string;
   onRetry?: () => void;
   showRetry?: boolean;
-  type?: 'products' | 'team' | 'general';
+  type?: ErrorStateType;
 };
 
 export function ErrorState({
@@ -17,14 +19,16 @@ export function ErrorState({
   message,
   onRetry,
   showRetry = true,
-  type = 'general',
+  type = ErrorStateType.General,
 }: ErrorStateProps) {
   const getIcon = () => {
     switch (type) {
-      case 'products':
+      case ErrorStateType.Products:
         return <Briefcase className="w-8 h-8 text-white" />;
-      case 'team':
+      case ErrorStateType.Team:
         return <Code className="w-8 h-8 text-white" />;
+      case ErrorStateType.Testimonials:
+        return <MessageCircle className="w-8 h-8 text-white" />;
       default:
         return <AlertCircle className="w-8 h-8 text-white" />;
     }
@@ -32,10 +36,12 @@ export function ErrorState({
 
   const getGradient = () => {
     switch (type) {
-      case 'products':
+      case ErrorStateType.Products:
         return 'from-emerald-500 to-blue-500';
-      case 'team':
+      case ErrorStateType.Team:
         return 'from-blue-500 to-purple-500';
+      case ErrorStateType.Testimonials:
+        return 'from-emerald-500 to-blue-600';
       default:
         return 'from-red-500 to-orange-500';
     }
