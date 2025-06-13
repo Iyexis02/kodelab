@@ -2,9 +2,11 @@
 
 import MilestoneCard from './MilestoneCard';
 import { useQuery } from '@apollo/client';
+import { useEffect } from 'react';
 
 import { ErrorState } from '@/app/components/error-state';
 import { TimelineSkeleton } from '@/app/components/skeleton-loader';
+import { useClientLogger } from '@/app/hooks/useClientLogger';
 import { ErrorStateType } from '@/enums';
 import { GET_MILESTONES } from '@/lib/apollo/queries';
 import { Milestone } from '@/types';
@@ -24,6 +26,45 @@ const Timeline = () => {
   const { loading, error, data, refetch } = useQuery(GET_MILESTONES);
   const milestones: Milestone[] = data?.allMilestones ?? [];
 
+  const { logInfo, logError, logApolloError } = useClientLogger();
+
+  useEffect(() => {
+    if (data && milestones.length > 0) {
+      logInfo(`Successfully loaded ${milestones.length} milestones`, 'MilestoneList', {
+        productCount: milestones.length,
+      });
+    }
+  }, [data, milestones.length, logInfo]);
+
+  useEffect(() => {
+    if (error) {
+      logApolloError(error, 'MilestoneList', {
+        query: 'GET_MILESTONES',
+        attemptedAction: 'loadMilestones',
+      });
+    }
+  }, [error, logApolloError]);
+
+  useEffect(() => {
+    if (!loading && !error && milestones.length === 0) {
+      logInfo('No products found in database', 'MilestoneList', {
+        dataState: 'empty',
+      });
+    }
+  }, [loading, error, milestones.length, logInfo]);
+
+  const handleRetry = async () => {
+    try {
+      logInfo('User initiated retry for milestones', 'MilestoneList');
+      await refetch();
+    } catch (retryError) {
+      logError(`Retry failed: ${retryError}`, 'MilestoneList', {
+        action: 'retry',
+        originalError: error?.message,
+      });
+    }
+  };
+
   if (loading) {
     return <TimelineSkeleton count={6} />;
   }
@@ -33,7 +74,7 @@ const Timeline = () => {
       <ErrorState
         title="Unable to load milestones"
         message={`We're having trouble loading the company milestones. ${error.message}`}
-        onRetry={() => refetch()}
+        onRetry={handleRetry}
         type={ErrorStateType.Milestones}
       />
     );

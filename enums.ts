@@ -101,3 +101,11 @@ export enum HTTPStatusCode {
   METHOD_NOT_ALLOWED = 405,
   INTERNAL_SERVER_ERROR = 500,
 }
+
+export enum LogType {
+  Message = 'message',
+  Error = 'error',
+  ApolloError = 'apollo_error',
+  Warning = 'warning',
+  Debug = 'debug',
+}

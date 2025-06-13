@@ -2,9 +2,11 @@
 
 import StatsCard from './StatsCard';
 import { useQuery } from '@apollo/client';
+import { useEffect } from 'react';
 
 import { ErrorState } from '@/app/components/error-state';
 import { StorySkeletonSection } from '@/app/components/skeleton-loader';
+import { useClientLogger } from '@/app/hooks/useClientLogger';
 import { ErrorStateType } from '@/enums';
 import { GET_STATS } from '@/lib/apollo/queries';
 import { Stats } from '@/types';
@@ -12,6 +14,45 @@ import { Stats } from '@/types';
 const Story = () => {
   const { loading, error, data, refetch } = useQuery(GET_STATS);
   const stats: Stats[] = data?.allStats ?? [];
+
+  const { logInfo, logError, logApolloError } = useClientLogger();
+
+  useEffect(() => {
+    if (data && stats.length > 0) {
+      logInfo(`Successfully loaded ${stats.length} stats`, 'Stats', {
+        productCount: stats.length,
+      });
+    }
+  }, [data, stats.length, logInfo]);
+
+  useEffect(() => {
+    if (error) {
+      logApolloError(error, 'Stats', {
+        query: 'GET_STATS',
+        attemptedAction: 'loadStats',
+      });
+    }
+  }, [error, logApolloError]);
+
+  useEffect(() => {
+    if (!loading && !error && stats.length === 0) {
+      logInfo('No stats found in database', 'Stats', {
+        dataState: 'empty',
+      });
+    }
+  }, [loading, error, stats.length, logInfo]);
+
+  const handleRetry = async () => {
+    try {
+      logInfo('User initiated retry for stats', 'StatList');
+      await refetch();
+    } catch (retryError) {
+      logError(`Retry failed: ${retryError}`, 'StatList', {
+        action: 'retry',
+        originalError: error?.message,
+      });
+    }
+  };
 
   if (loading) {
     return <StorySkeletonSection />;
@@ -24,7 +65,7 @@ const Story = () => {
           <ErrorState
             title="Unable to load our story"
             message={`We're having trouble loading our company story. ${error.message}`}
-            onRetry={() => refetch()}
+            onRetry={handleRetry}
             type={ErrorStateType.Stats}
           />
         </div>

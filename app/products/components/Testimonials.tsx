@@ -2,9 +2,11 @@
 
 import TestimonialCard from './TestimonialCard';
 import { useQuery } from '@apollo/client';
+import { useEffect } from 'react';
 
 import { ErrorState } from '@/app/components/error-state';
 import { TestimonialsGridSkeleton } from '@/app/components/skeleton-loader';
+import { useClientLogger } from '@/app/hooks/useClientLogger';
 import { ErrorStateType } from '@/enums';
 import { GET_TESTIMONIALS } from '@/lib/apollo/queries';
 import { Testimonial } from '@/types';
@@ -12,6 +14,45 @@ import { Testimonial } from '@/types';
 const Testimonials = () => {
   const { loading, error, data, refetch } = useQuery(GET_TESTIMONIALS);
   const testimonials: Testimonial[] = data?.allTestimonials ?? [];
+
+  const { logInfo, logError, logApolloError } = useClientLogger();
+
+  useEffect(() => {
+    if (data && testimonials.length > 0) {
+      logInfo(`Successfully loaded ${testimonials.length} testimonials`, 'ValueList', {
+        productCount: testimonials.length,
+      });
+    }
+  }, [data, testimonials.length, logInfo]);
+
+  useEffect(() => {
+    if (error) {
+      logApolloError(error, 'TestimonialList', {
+        query: 'GET_TESTIMONIALS',
+        attemptedAction: 'loadTestimonals',
+      });
+    }
+  }, [error, logApolloError]);
+
+  useEffect(() => {
+    if (!loading && !error && testimonials.length === 0) {
+      logInfo('No testimonials found in database', 'TestimonialList', {
+        dataState: 'empty',
+      });
+    }
+  }, [loading, error, testimonials.length, logInfo]);
+
+  const handleRetry = async () => {
+    try {
+      logInfo('User initiated retry for testimonials', 'TestimonialList');
+      await refetch();
+    } catch (retryError) {
+      logError(`Retry failed: ${retryError}`, 'TestimonialList', {
+        action: 'retry',
+        originalError: error?.message,
+      });
+    }
+  };
 
   if (loading) {
     return <TestimonialsGridSkeleton count={6} />;
@@ -22,7 +63,7 @@ const Testimonials = () => {
       <ErrorState
         title="Unable to load testimonials"
         message={`We're having trouble loading the testimonials. ${error.message}`}
-        onRetry={() => refetch()}
+        onRetry={handleRetry}
         type={ErrorStateType.Testimonials}
       />
     );

@@ -90,10 +90,7 @@ export async function POST(request: Request) {
 
     await transporter.sendMail(mailOptions);
 
-    return NextResponse.json(
-      { success: true, message: 'Email sent successfully' },
-      { status: HTTPStatusCode.NO_CONTENT }
-    );
+    return NextResponse.json({ success: true, message: 'Email sent successfully' }, { status: HTTPStatusCode.OK });
   } catch (error) {
     console.error('Error sending email:', error);
     return NextResponse.json(

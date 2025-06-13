@@ -2,9 +2,11 @@
 
 import CompanyValueCard from './CompanyValueCard';
 import { useQuery } from '@apollo/client';
+import { useEffect } from 'react';
 
 import { ErrorState } from '@/app/components/error-state';
 import { ValuesGridSkeleton } from '@/app/components/skeleton-loader';
+import { useClientLogger } from '@/app/hooks/useClientLogger';
 import { ErrorStateType } from '@/enums';
 import { GET_COMPANY_VALUES } from '@/lib/apollo/queries';
 import { CompanyValue } from '@/types';
@@ -25,6 +27,45 @@ const Values = () => {
   const { loading, error, data, refetch } = useQuery(GET_COMPANY_VALUES);
   const values: CompanyValue[] = data?.allCompanyvalues ?? [];
 
+  const { logInfo, logError, logApolloError } = useClientLogger();
+
+  useEffect(() => {
+    if (data && values.length > 0) {
+      logInfo(`Successfully loaded ${values.length} values`, 'ValueList', {
+        productCount: values.length,
+      });
+    }
+  }, [data, values.length, logInfo]);
+
+  useEffect(() => {
+    if (error) {
+      logApolloError(error, 'ValueList', {
+        query: 'GET_VALUES',
+        attemptedAction: 'loadValues',
+      });
+    }
+  }, [error, logApolloError]);
+
+  useEffect(() => {
+    if (!loading && !error && values.length === 0) {
+      logInfo('No values found in database', 'ValueList', {
+        dataState: 'empty',
+      });
+    }
+  }, [loading, error, values.length, logInfo]);
+
+  const handleRetry = async () => {
+    try {
+      logInfo('User initiated retry for milestones', 'MilestoneList');
+      await refetch();
+    } catch (retryError) {
+      logError(`Retry failed: ${retryError}`, 'MilestoneList', {
+        action: 'retry',
+        originalError: error?.message,
+      });
+    }
+  };
+
   if (loading) {
     return <ValuesGridSkeleton count={6} />;
   }
@@ -34,7 +75,7 @@ const Values = () => {
       <ErrorState
         title="Unable to load company values"
         message={`We're having trouble loading the company values. ${error.message}`}
-        onRetry={() => refetch()}
+        onRetry={handleRetry}
         type={ErrorStateType.Values}
       />
     );

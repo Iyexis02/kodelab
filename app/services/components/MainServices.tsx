@@ -97,7 +97,7 @@ const MainServices = () => {
                 className={`grid lg:grid-cols-2 gap-8 md:gap-12 items-center ${
                   isEven ? '' : 'lg:grid-flow-col-dense'
                 }`}>
-                {/* Content */}
+                s{' '}
                 <div className={isEven ? '' : 'lg:col-start-2'}>
                   <Card className="shadow-xl border-0 h-full">
                     <CardHeader className="pb-4">
@@ -151,8 +151,6 @@ const MainServices = () => {
                     </CardContent>
                   </Card>
                 </div>
-
-                {/* Visual */}
                 <div className={isEven ? '' : 'lg:col-start-1'}>
                   <div className="relative">
                     <div
@@ -163,7 +161,6 @@ const MainServices = () => {
                         <p className="text-white/90 text-lg">{service.subtitle}</p>
                       </div>
 
-                      {/* Decorative elements */}
                       <div className="absolute top-4 right-4 w-8 h-8 bg-white/20 rounded-full"></div>
                       <div className="absolute bottom-4 left-4 w-6 h-6 bg-white/20 rounded-full"></div>
                       <div className="absolute top-1/2 left-4 w-4 h-4 bg-white/20 rounded-full"></div>

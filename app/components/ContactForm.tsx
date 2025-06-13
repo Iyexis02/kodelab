@@ -1,6 +1,7 @@
 'use client';
 
 import { useModal } from '../contexts/ModalContext';
+import { useClientLogger } from '../hooks/useClientLogger';
 import { Button } from './ui/Button';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/Card';
 import { Input } from './ui/Input';
@@ -23,6 +24,7 @@ type ContactFormProps = {
 export function ContactForm({ onSubmit, isModal = false }: ContactFormProps) {
   const { modalContent } = useModal();
   const preGeneratedMessage = 'I would like to schedule a free consultation to discuss my queries.';
+  const { logError } = useClientLogger();
 
   const generateDefaultData = () => {
     switch (modalContent) {
@@ -114,11 +116,11 @@ export function ContactForm({ onSubmit, isModal = false }: ContactFormProps) {
 
   const handleInputChange = (field: keyof ContactFormData, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
-    // Clear error when user starts typing
+
     if (errors[field]) {
       setErrors((prev) => ({ ...prev, [field]: undefined }));
     }
-    // Clear submit error if there was one
+
     if (submitError) {
       setSubmitError(null);
     }
@@ -144,7 +146,14 @@ export function ContactForm({ onSubmit, isModal = false }: ContactFormProps) {
       const result = await response.json();
 
       if (!response.ok) {
-        throw new Error(result.message || 'Failed to submit form');
+        if (!response.ok) {
+          await logError(`Contact form API error: ${response.status}`, 'ContactForm', {
+            statusCode: response.status,
+            inquiryType: validatedData.inquiryType,
+            hasErrorMessage: !!result.message,
+          });
+          throw new Error(result.message || 'Failed to submit form');
+        }
       }
 
       if (onSubmit) {

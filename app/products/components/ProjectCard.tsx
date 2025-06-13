@@ -21,7 +21,6 @@ const ProjectCard = ({ project, isEven, IconComponent }: ProjectCardProps) => {
     <div
       key={project.id}
       className={`grid lg:grid-cols-2 gap-8 md:gap-12 items-center ${isEven ? '' : 'lg:grid-flow-col-dense'}`}>
-      {/* Project Visual */}
       <div className={isEven ? '' : 'lg:col-start-2'}>
         <div className="relative">
           <div className={`bg-gradient-to-br ${project.gradient} rounded-2xl p-8 md:p-12 text-white shadow-2xl`}>
@@ -31,7 +30,6 @@ const ProjectCard = ({ project, isEven, IconComponent }: ProjectCardProps) => {
               <p className="text-white/90 text-lg">{project.category}</p>
             </div>
 
-            {/* Mock interface elements */}
             <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 mb-4">
               <div className="flex items-center justify-between mb-3">
                 <div className="flex space-x-2">
@@ -48,7 +46,6 @@ const ProjectCard = ({ project, isEven, IconComponent }: ProjectCardProps) => {
               </div>
             </div>
 
-            {/* Project stats */}
             <div className="grid grid-cols-2 gap-4 text-center">
               <div className="bg-white/10 rounded-lg p-3">
                 <div className="text-sm text-white/80">Duration</div>
@@ -63,7 +60,6 @@ const ProjectCard = ({ project, isEven, IconComponent }: ProjectCardProps) => {
         </div>
       </div>
 
-      {/* Project Details */}
       <div className={isEven ? '' : 'lg:col-start-1'}>
         <Card className="shadow-xl border-0 h-full">
           <CardHeader className="pb-4">

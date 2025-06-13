@@ -2,9 +2,11 @@
 
 import TeamCard from './EmployeeCard';
 import { useQuery } from '@apollo/client';
+import { useEffect } from 'react';
 
 import { ErrorState } from '@/app/components/error-state';
 import { TeamGridSkeleton } from '@/app/components/skeleton-loader';
+import { useClientLogger } from '@/app/hooks/useClientLogger';
 import { ErrorStateType } from '@/enums';
 import { GET_EMPLOYEES } from '@/lib/apollo/queries';
 import { Employee } from '@/types';
@@ -12,6 +14,45 @@ import { Employee } from '@/types';
 const EmployeeList = () => {
   const { loading, error, data, refetch } = useQuery(GET_EMPLOYEES);
   const employees: Employee[] = data?.allEmployees ?? [];
+
+  const { logInfo, logError, logApolloError } = useClientLogger();
+
+  useEffect(() => {
+    if (data && employees.length > 0) {
+      logInfo(`Successfully loaded ${employees.length} employees`, 'EmployeeList', {
+        productCount: employees.length,
+      });
+    }
+  }, [data, employees.length, logInfo]);
+
+  useEffect(() => {
+    if (error) {
+      logApolloError(error, 'EmployeeList', {
+        query: 'GET_EMPLOYEES',
+        attemptedAction: 'loadEmployees',
+      });
+    }
+  }, [error, logApolloError]);
+
+  useEffect(() => {
+    if (!loading && !error && employees.length === 0) {
+      logInfo('No employees found in database', 'EmployeeList', {
+        dataState: 'empty',
+      });
+    }
+  }, [loading, error, employees.length, logInfo]);
+
+  const handleRetry = async () => {
+    try {
+      logInfo('User initiated retry for employees', 'EmployeeList');
+      await refetch();
+    } catch (retryError) {
+      logError(`Retry failed: ${retryError}`, 'EmployeeList', {
+        action: 'retry',
+        originalError: error?.message,
+      });
+    }
+  };
 
   if (loading) {
     return <TeamGridSkeleton count={6} />;

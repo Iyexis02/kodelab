@@ -40,7 +40,6 @@ const Process = () => {
 
         <div className="max-w-4xl mx-auto">
           <div className="relative">
-            {/* Process line */}
             <div className="hidden md:block absolute top-1/2 left-0 right-0 h-0.5 bg-gradient-to-r from-emerald-500 to-blue-600 transform -translate-y-1/2"></div>
 
             <div className="grid md:grid-cols-4 gap-8">
@@ -48,7 +47,6 @@ const Process = () => {
                 const Icon = step.icon;
                 return (
                   <div key={index} className="relative text-center">
-                    {/* Step number and icon */}
                     <div className="relative mb-6">
                       <div className="w-16 h-16 bg-gradient-to-br from-emerald-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg relative z-10">
                         <Icon className="w-8 h-8 text-white" />
