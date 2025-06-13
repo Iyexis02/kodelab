@@ -2,14 +2,12 @@ import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 
 import { ContactFormData } from '@/app/components/ContactForm';
-import { InquiryType } from '@/enums';
+import { HTTPStatusCode, InquiryType } from '@/enums';
 
 export async function POST(request: Request) {
   try {
-    // Parse the request body
     const formData: ContactFormData = await request.json();
 
-    // Create a transporter
     const transporter = nodemailer.createTransport({
       host: process.env.EMAIL_HOST,
       port: Number(process.env.EMAIL_PORT) || 587,
@@ -20,7 +18,6 @@ export async function POST(request: Request) {
       },
     });
 
-    // Format the message based on inquiry type
     const subject = `New Contact Form Submission: ${formData.inquiryType}`;
     let messageDetails = '';
 
@@ -36,7 +33,6 @@ export async function POST(request: Request) {
       `;
     }
 
-    // Compose email content
     const mailOptions = {
       from: process.env.EMAIL_FROM,
       to: process.env.EMAIL_TO,
@@ -92,12 +88,17 @@ export async function POST(request: Request) {
       `,
     };
 
-    // Send the email
     await transporter.sendMail(mailOptions);
 
-    return NextResponse.json({ success: true, message: 'Email sent successfully' }, { status: 200 });
+    return NextResponse.json(
+      { success: true, message: 'Email sent successfully' },
+      { status: HTTPStatusCode.NO_CONTENT }
+    );
   } catch (error) {
     console.error('Error sending email:', error);
-    return NextResponse.json({ success: false, message: 'Failed to send email' }, { status: 500 });
+    return NextResponse.json(
+      { success: false, message: 'Failed to send email' },
+      { status: HTTPStatusCode.INTERNAL_SERVER_ERROR }
+    );
   }
 }
