@@ -10,8 +10,8 @@ const TeamPage = () => {
         <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0 bg-gradient-radial from-white/20 to-transparent"></div>
         </div>
-        <div className="container mx-auto px-4 text-center relative">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+        <div className="container mx-auto px-6 text-center relative">
+          <h1 className="text-4xl/normal md:text-6xl/normal font-bold mb-6 leading-tight py-2">
             Meet Our
             <span className="block text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-blue-400">
               Amazing Team

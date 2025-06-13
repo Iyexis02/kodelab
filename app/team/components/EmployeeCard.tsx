@@ -44,7 +44,7 @@ const TeamCard = ({ employee }: TeamCardProps) => {
           </div>
           <div className="flex space-x-3">
             {employee?.socials?.linkedin && (
-              <Link href={employee?.socials?.linkedin}>
+              <Link target="_blank" href={employee?.socials?.linkedin}>
                 <Button
                   variant="ghost"
                   size="icon"
@@ -54,7 +54,7 @@ const TeamCard = ({ employee }: TeamCardProps) => {
               </Link>
             )}
             {employee?.socials?.github && (
-              <Link href={`mailto:${employee?.socials?.github}`}>
+              <Link target="_blank" href={employee?.socials?.github}>
                 <Button
                   variant="ghost"
                   size="icon"
