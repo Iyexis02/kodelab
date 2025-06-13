@@ -1,4 +1,5 @@
 import { Github, Linkedin, Mail, Twitter } from 'lucide-react';
+import Link from 'next/link';
 
 import { Button } from '@/app/components/ui/Button';
 import { Card, CardContent } from '@/app/components/ui/Card';
@@ -43,20 +44,24 @@ const TeamCard = ({ employee }: TeamCardProps) => {
           </div>
           <div className="flex space-x-3">
             {employee?.socials?.linkedin && (
-              <Button
-                variant="ghost"
-                size="icon"
-                className="w-10 h-10 rounded-full hover:bg-blue-100 hover:text-blue-600 transition-colors">
-                <Linkedin className="w-5 h-5" />
-              </Button>
+              <Link href={employee?.socials?.linkedin}>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="w-10 h-10 rounded-full hover:bg-blue-100 hover:text-blue-600 transition-colors">
+                  <Linkedin className="w-5 h-5" />
+                </Button>
+              </Link>
             )}
             {employee?.socials?.github && (
-              <Button
-                variant="ghost"
-                size="icon"
-                className="w-10 h-10 rounded-full hover:bg-gray-100 hover:text-gray-900 transition-colors">
-                <Github className="w-5 h-5" />
-              </Button>
+              <Link href={`mailto:${employee?.socials?.github}`}>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="w-10 h-10 rounded-full hover:bg-gray-100 hover:text-gray-900 transition-colors">
+                  <Github className="w-5 h-5" />
+                </Button>
+              </Link>
             )}
             {employee?.socials?.twitter && (
               <Button
@@ -67,12 +72,14 @@ const TeamCard = ({ employee }: TeamCardProps) => {
               </Button>
             )}
             {employee?.socials?.email && (
-              <Button
-                variant="ghost"
-                size="icon"
-                className="w-10 h-10 rounded-full hover:bg-emerald-100 hover:text-emerald-600 transition-colors">
-                <Mail className="w-5 h-5" />
-              </Button>
+              <Link href={`mailto:${employee?.socials?.email}`}>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="w-10 h-10 rounded-full hover:bg-emerald-100 hover:text-emerald-600 transition-colors">
+                  <Mail className="w-5 h-5" />
+                </Button>
+              </Link>
             )}
           </div>
         </div>

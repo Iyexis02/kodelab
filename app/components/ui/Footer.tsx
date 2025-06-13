@@ -5,7 +5,7 @@ import { LayoutLink } from '@/types';
 
 const Footer = () => {
   const footerLinks: LayoutLink[] = [
-    { label: 'Privacy Policy', url: '/privacy-policy' },
+    { label: 'Privacy Policy', url: '/' },
     { label: 'Portfolio', url: '/products' },
     { label: 'Meet the Team', url: '/team' },
   ];
